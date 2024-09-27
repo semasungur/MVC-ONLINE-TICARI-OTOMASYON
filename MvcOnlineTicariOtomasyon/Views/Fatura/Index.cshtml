@@ -1,0 +1,70 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Faturalar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<table class="table table-bordered" style="margin-top:20px">
+    <tr>
+        <th>Seri / Sıra No</th>
+        <th>Tarih</th>
+        <th>Saat</th>
+        <th>Toplam</th>
+        <th>Güncelle</th>
+        <th>Detaylar</th>
+        <th>Yeni Kalem</th>
+    </tr>
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>@k.FaturaSeriNo @k.FaturaSiraNo</td>
+            <td>@k.Tarih</td>
+            <td>@k.Saat</td>
+            <td>@k.Toplam ₺</td>
+            <td><a href="/Fatura/FaturaGetir/@k.FaturaID" class="btn btn-warning">Güncelle</a></td>
+            <td><a href="/Fatura/FaturaDetay/@k.FaturaID" class="btn btn-success">Fatura Detay</a></td>
+            <td><a href="/Fatura/FaturaDetay/@k.FaturaID" class="btn btn-default" style="background-color:darkgoldenrod">Kalemler</a></td>
+        </tr>
+    }
+
+</table>
+<a href="/Fatura/FaturaEkle" class="btn btn-primary">Fatura Ekle</a>
+<br />
+<br />
+<!-- Popup butonunu burada tanımladık-->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#Modal1">
+    PopUp Penceresi
+</button>
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Diyalog Ekranı</h2>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Seri No</td>
+                        <td>Sıra No</td>
+                        <td>Tutar</td>
+                    </tr>
+                    @foreach (var x in Model) {
+                    <tr>
+                        <td>@x.FaturaSeriNo</td>
+                        <td>@x.FaturaSiraNo</td>
+                        <td>@x.Toplam ₺</td>
+                    </tr>
+                    }
+                </table>
+                <button ty pe="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button> 
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Popup çalışmadı bu scriptleri ekledim-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
